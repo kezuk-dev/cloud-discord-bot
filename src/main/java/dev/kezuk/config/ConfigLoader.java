@@ -31,13 +31,12 @@ public class ConfigLoader {
 
         try (InputStream inputStream = new FileInputStream(configFile)) {
             Map<String, Object> config = yaml.load(inputStream);
-            if (config != null && config.containsKey("bot")) {
-                Map<String, Object> botConfig = (Map<String, Object>) config.get("bot");
-                CloudBot.setToken((String) botConfig.get("token"));
-                CloudBot.setWelcomeChannelId((String) botConfig.get("welcome-channel"));
-                CloudBot.setAutoRankId((String) botConfig.get("auto-role"));
+            if (config != null) {
+                CloudBot.setToken((String) config.get("token"));
+                CloudBot.setWelcomeChannelId((String) config.get("welcome-channel"));
+                CloudBot.setAutoRankId((String) config.get("auto-role"));
             } else {
-                throw new IllegalArgumentException("Clé 'bot' manquante dans le fichier de configuration.");
+                throw new IllegalArgumentException("Fichier de configuration érronée");
             }
         } catch (Exception e) {
             e.printStackTrace();
