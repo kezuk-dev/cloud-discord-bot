@@ -9,9 +9,12 @@ import java.util.Map;
 public class ConfigLoader {
 
     private static final String DEFAULT_CONFIG_CONTENT =
-            "token: \"VOTRE_TOKEN_ICI\"\n" +
-            "welcome-channel: \"ID_CHANNEL_ICI\"\n" +
-            "auto-role: \"ROLE_ID_ICI\"\n";
+                    "token: \"VOTRE_TOKEN_ICI\"\n" +
+                    "welcome-channel: \"ID_CHANNEL_ICI\"\n" +
+                    "auto-role: \"ROLE_ID_ICI\"\n" +
+                    "support-category: \"CATEGORY_ID_ICI\"\n" +
+                    "recrutement-category: \"CATEGORY_ID_ICI\"\n" +
+                    "ticket-channel: \"CHANNEL_ID_ICI\"\n";
 
     public ConfigLoader(String configFilePath) {
         Yaml yaml = new Yaml();
@@ -35,6 +38,9 @@ public class ConfigLoader {
                 CloudBot.setToken((String) config.get("token"));
                 CloudBot.setWelcomeChannelId((String) config.get("welcome-channel"));
                 CloudBot.setAutoRankId((String) config.get("auto-role"));
+                CloudBot.setRecrutementCategoryId((String) config.get("recrutement-category"));
+                CloudBot.setSupportCategoryId((String) config.get("support-category"));
+                CloudBot.setTicketChannelId((String) config.get("ticket-channel"));
             } else {
                 throw new IllegalArgumentException("Fichier de configuration érronée");
             }

@@ -13,14 +13,11 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 public class JoinListener extends ListenerAdapter {
 
-    private static final String WELCOME_CHANNEL_ID = CloudBot.getWelcomeChannelId();
-    private static final String DEFAULT_ROLE_ID = CloudBot.getAutoRankId();
-
     @Override
     public void onGuildMemberJoin(GuildMemberJoinEvent event) {
         Member member = event.getMember();
         Guild guild = event.getGuild();
-        TextChannel welcomeChannel = guild.getTextChannelById(WELCOME_CHANNEL_ID);
+        TextChannel welcomeChannel = guild.getTextChannelById(CloudBot.getWelcomeChannelId());
         if (welcomeChannel != null) {
             EmbedBuilder builder = new EmbedBuilder();
             builder.setColor(0xf22613);
@@ -32,7 +29,7 @@ public class JoinListener extends ListenerAdapter {
             welcomeChannel.sendMessageEmbeds(builder.build()).queue();
         }
 
-        Role defaultRole = guild.getRoleById(DEFAULT_ROLE_ID);
+        Role defaultRole = guild.getRoleById(CloudBot.getAutoRankId());
         if (defaultRole != null) {
             guild.addRoleToMember(member, defaultRole).queue();
         }
